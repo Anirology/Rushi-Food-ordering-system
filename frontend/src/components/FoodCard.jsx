@@ -1,3 +1,4 @@
+import React from 'react'
 import { ArrowUpRight, Plus } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext.jsx'
@@ -9,7 +10,7 @@ export default function FoodCard({ food, index = 0 }) {
   const { add } = useCart()
   return (
     <article className="food-card" style={{ '--card-index': index }}>
-      <Link className="food-image-link" to={`/menu/${food.slug || food.id}`} aria-label={`View ${food.name}`}>
+      <Link className="food-image-link" to={`/menu/${food.id}`} aria-label={`View ${food.name}`}>
         <img className="food-image" src={foodImage(food)} alt={food.name} loading="lazy" />
         <span className="food-tag">{food.tag || food.category || 'From our kitchen'}</span>
         <span className="image-arrow"><ArrowUpRight size={17} /></span>

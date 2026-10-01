@@ -1,9 +1,20 @@
+import React from 'react'
+import { useEffect, useState } from 'react'
 import { ArrowDownRight, ArrowRight, Leaf, MoveUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import FoodCard from '../components/FoodCard.jsx'
 import { sampleFoods } from '../data/menu.js'
+import { getFoods } from '../services/api.js'
 
 export default function HomePage() {
+  const [featuredFoods, setFeaturedFoods] = useState(sampleFoods.slice(0, 3))
+  useEffect(() => {
+    let active = true
+    getFoods({ page: 1, limit: 3, available_only: true })
+      .then((foods) => { if (active && foods?.length) setFeaturedFoods(foods) })
+      .catch(() => {})
+    return () => { active = false }
+  }, [])
   return (
     <>
       <section className="hero-section page-shell">
@@ -28,7 +39,7 @@ export default function HomePage() {
 
       <section className="featured-section page-shell">
         <div className="section-heading"><div><span className="eyebrow">A few favourites</span><h2>From our kitchen, <em>with love.</em></h2></div><Link className="text-link" to="/menu">See the full menu <ArrowRight size={16} /></Link></div>
-        <div className="food-grid">{sampleFoods.slice(0, 3).map((food, index) => <FoodCard key={food.id} food={food} index={index} />)}</div>
+        <div className="food-grid">{featuredFoods.map((food, index) => <FoodCard key={food.id} food={food} index={index} />)}</div>
       </section>
 
       <section className="story-section page-shell">

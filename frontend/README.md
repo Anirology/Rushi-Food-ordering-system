@@ -1,6 +1,6 @@
 # Frontend
 
-React single-page ordering experience built with Vite. The menu can operate with the local sample catalog while the API is offline; checkout and order history use the FastAPI service when it is available.
+React ordering experience built with Vite. Customers can browse and search the menu, view dish details, build a saved cart, place an order, view confirmation, and look up order history. The menu and home page fall back to a sample catalog while the API is offline. Staff sign in at `/admin` to manage menu availability, categories, orders, and customers.
 
 ## Local setup
 
