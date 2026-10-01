@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+coverage.xml
+
+# Frontend
+node_modules/
+dist/
+.vite/
+npm-debug.log*
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Build artifacts
+*.log
+*.tmp
