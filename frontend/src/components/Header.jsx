@@ -1,14 +1,16 @@
-import React from 'react'
+﻿import React from 'react'
 import { Link, NavLink } from 'react-router-dom'
 import { ArrowUpRight, Menu, ShoppingBag, X } from 'lucide-react'
 import { useState } from 'react'
 import { useCart } from '../context/CartContext.jsx'
 import { Brand } from './Brand.jsx'
+import { useAuth } from '../context/AuthContext.jsx'
 
-const links = [['Home', '/'], ['Our menu', '/menu'], ['Our story', '/#story'], ['My orders', '/orders']]
+const links = [['Home', '/home'], ['Our menu', '/menu'], ['Our story', '/home#story']]
 
 export default function Header() {
   const { count } = useCart()
+  const { session } = useAuth()
   const [open, setOpen] = useState(false)
   return (
     <header className="site-header" id="top">
@@ -20,7 +22,7 @@ export default function Header() {
         </nav>
         <div className="header-actions">
           <Link className="cart-link" to="/cart" aria-label={`Cart, ${count} items`}><ShoppingBag size={19} /><span>Cart</span><b>{count}</b></Link>
-          <Link className="button button-small" to="/menu">Order now <ArrowUpRight size={15} /></Link>
+          <Link className="button button-small" to={session?.role === 'customer' ? '/dashboard' : '/login'}>{session?.role === 'customer' ? 'My account' : 'Sign in'} <ArrowUpRight size={15} /></Link>
         </div>
       </div>
     </header>
